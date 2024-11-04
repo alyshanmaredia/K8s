@@ -1,0 +1,26 @@
+services:
+  outer:
+    image: alyshanmaredia/outerimage:latest
+    container_name: outerimage-container
+    ports:
+      - 6000:6000
+    volumes:
+      - .:/outerapp/files
+    environment:
+      - PROCESSOR_CONTAINER_URL=http://processor:8000
+    networks:
+      - a1-network
+  processor:
+    image: alyshanmaredia/processorimage:latest
+    container_name: processorimage-container
+    volumes:
+      - .:/processorapp/files
+    ports:
+      - 8000:8000
+    networks:
+      - a1-network
+volumes:
+  .:
+networks:
+  a1-network:
+
